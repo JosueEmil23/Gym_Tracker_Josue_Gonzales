@@ -1,42 +1,70 @@
 package edu.pe.gymtracker.stepdefinitions;
 
+import edu.pe.gymtracker.abillities.UseAnAppiumDriver;
+import edu.pe.gymtracker.questions.ExerciseVisible;
+import edu.pe.gymtracker.tasks.AddExercise;
 import edu.pe.gymtracker.utils.DriverManager;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.serenitybdd.annotations.Managed;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.thucydides.core.webdriver.WebDriverFacade;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.Browser;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ExerciseStepDefinitions {
+
+    private Actor actor;
+    private String nombre;
+    private String grupoMuscular;
+    private String tipo;
+
 
     static{
         System.out.println("STEPS CARGADOs");
     }
 
     @Given("que el usuario abre la app GymTracker")
-    public void que_el_usuario_abre_la_app_GymTracker() {}
+    public void que_el_usuario_abre_la_app_GymTracker() {
+        actor = Actor.named("usuario");
+        actor.can(BrowseTheWeb.with(DriverManager.getDriver()));
+    }
 
     @When("presiona el boton de agregar ejercicio")
     public void presiona_el_boton_de_agregar_ejercicio() {
-
-        DriverManager.getDriver()
-                .findElement(AppiumBy.xpath("//android.widget.Button"))
-                .click();
-
     }
 
     @And("ingresa el nombre {string}")
-    public void ingresa_el_nombre(String nombre) {}
+    public void ingresa_el_nombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     @And("selecciona el grupo muscular {string}")
-    public void selecciona_el_grupo_muscular(String grupo) {}
+    public void selecciona_el_grupo_muscular(String grupo) {
+        this.grupoMuscular = grupo;
+    }
 
     @And("selecciona el tipo {string}")
-    public void selecciona_el_tipo(String tipo) {}
+    public void selecciona_el_tipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     @And("guarda el ejercicio")
-    public void guarda_el_ejercicio() {}
+    public void guarda_el_ejercicio() {
+        actor.attemptsTo(
+                AddExercise.withData(this.nombre, this.grupoMuscular, this.tipo)
+        );
+    }
 
     @Then("deberia ver el ejercicio {string} en la lista")
-    public void deberia_ver_el_ejercicio_en_la_lista(String nombre) {}
+    public void deberia_ver_el_ejercicio_en_la_lista(String nombre) {
+        assertTrue(actor.asksFor(ExerciseVisible.named(nombre)));
+    }
 }

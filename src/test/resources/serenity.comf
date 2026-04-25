@@ -1,0 +1,13 @@
+webdriver {
+    driver = appium
+}
+
+appium {
+    hub = "http://127.0.0.1:4723"
+    platformName = "Android"
+    deviceName = "emulator-5554"
+    automationName = "UiAutomator2"
+    appPackage = "edu.pe.cibertec.gymtrakcer"
+    appActivity = "edu.pe.cibertec.gymtrakcer.MainActivity"
+    noReset = false
+}
