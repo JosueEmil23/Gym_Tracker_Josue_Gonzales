@@ -25,5 +25,12 @@ public class ExercisePage {
     public static final Target GENERIC_OPTION = Target.the("opcion {0}")
             .locatedBy("//*[@text='{0}']");
 
+    //para el test3
+    public static final Target EXERCISE_BY_NAME = Target.the("ejercicio por nombre")
+            .locatedBy("//*[@text='{0}' or @content-desc='{0}']");
+
+    public static final Target EDIT_ICON = Target.the("icono editar")
+            .located(AppiumBy.accessibilityId("Editar"));
+
 
 }
