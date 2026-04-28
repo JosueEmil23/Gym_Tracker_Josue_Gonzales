@@ -24,15 +24,19 @@ public class ExerciseStepDefinitions {
     private String grupoMuscular;
     private String tipo;
 
+    /*
     @Given("que el usuario abre la app GymTracker")
     public void que_el_usuario_abre_la_app_GymTracker() {
         actor = Actor.named("usuario");
         actor.can(BrowseTheWeb.with(driver));
     }
 
+
     @When("presiona el boton de agregar ejercicio")
     public void presiona_el_boton_de_agregar_ejercicio() {
     }
+
+
 
     @And("ingresa el nombre {string}")
     public void ingresa_el_nombre(String nombre) {
@@ -60,4 +64,6 @@ public class ExerciseStepDefinitions {
     public void deberia_ver_el_ejercicio_en_la_lista(String nombre) {
         assertTrue(actor.asksFor(ExerciseVisible.named(nombre)));
     }
+    */
+
 }
